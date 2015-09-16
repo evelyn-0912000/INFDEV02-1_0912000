@@ -1,4 +1,7 @@
-﻿name = raw_input("What is your name?\n> ")
+﻿import sys
+import math
+
+name = raw_input("What is your name?\n> ")
 print "Hi " + name + '.'
 
 try:
@@ -8,7 +11,11 @@ try:
         for line in range(0, length):
             content = ""
             for column in range(0, length):
-                if length - line - column > 1 or length - column == 1 or length - line == 1:
+                if line == 0:
+                    content = content + '*'
+                elif length - line - column < (length - line) / 2 + 1 and column < length / 2 + line / 2:
+                    content = content + '*'
+                elif length - column == 1 or length - line == 1:
                     content = content + '*'
                 else:
                     content = content + ' '
