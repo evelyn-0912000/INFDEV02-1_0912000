@@ -2,7 +2,7 @@
 import math
 
 name = raw_input("What is your name?\n> ")
-print "Hi " + name + '.'
+print "Hi %s." %(name)
 
 try:
     length = int(raw_input("How long do you wish your square to be (in asterisks)?\n> "))
@@ -19,7 +19,7 @@ try:
                     content = content + '*'
                 else:                                                                                           #empty space
                     content = content + ' '
-            print content
+            sys.stdout.write(content + '\n')
 
     else:
         print str(length) + " is not a valid number. Try an integer of five or larger."
