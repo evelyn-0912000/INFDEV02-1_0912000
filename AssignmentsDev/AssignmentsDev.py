@@ -11,13 +11,13 @@ try:
         for line in range(0, length):
             content = ""
             for column in range(0, length):
-                if line == 0:
+                if line == 0:                                                                                   #top line
                     content = content + '*'
-                elif length - line - column < (length - line) / 2 + 2 and column < length / 2 + line / 2:
+                elif length - line - column < (length - line) / 2 + 2 and column < length / 2 + line / 2:       #content
                     content = content + '*'
-                elif length - column == 1 or length - line == 1:
+                elif length - column == 1 or length - line == 1:                                                #right & bottom line
                     content = content + '*'
-                else:
+                else:                                                                                           #empty space
                     content = content + ' '
             print content
 
