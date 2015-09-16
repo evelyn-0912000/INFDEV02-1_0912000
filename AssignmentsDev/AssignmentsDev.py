@@ -13,7 +13,7 @@ try:
             for column in range(0, length):
                 if line == 0:
                     content = content + '*'
-                elif length - line - column < (length - line) / 2 + 1 and column < length / 2 + line / 2:
+                elif length - line - column < (length - line) / 2 + 2 and column < length / 2 + line / 2:
                     content = content + '*'
                 elif length - column == 1 or length - line == 1:
                     content = content + '*'
