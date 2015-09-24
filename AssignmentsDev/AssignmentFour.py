@@ -1,13 +1,20 @@
 ﻿import re
 import random
 import sys
+import math
+
+def floatEval(floVar):
+    decimals = floVar - math.floor(floVar)
+
+    if decimals > 0.0:
+        return round(floVar, 2)
+    else:
+        return int(floVar)
 
 def runChoice(correction):
-    running = raw_input(correction + "\nEnter 'y' to restart the section, 'a' to abort, and anything else to continue on.\n> ")
+    running = raw_input(correction + "\nEnter 'y' to restart the section, and anything else to continue per usual.\n> ")
     if running == 'y':
         return True
-    elif running == 'a':
-        sys.exit("User chose to abort during the runChoice sequence.")
     return False
 
 running = True
@@ -22,8 +29,9 @@ while running == True and skip != 'y':
             continue
 
         celsius = (fahrenheit - 32) / 1.8
+        celsius = floatEval(celsius)
 
-        print("The temperature in Celsius is " + str(celsius) + '.')
+        print("The temperature in Celsius is %0.2f." % celsius)
         
         celsius = float(raw_input("What is the temperature in Celsius you wish to convert to Kelvin?\n> "))
         
@@ -31,16 +39,14 @@ while running == True and skip != 'y':
             running = runChoice("The temperature needs to be between absolute zero and the Planck temperature.")
             continue
         
-        kelvin = celsius - 273.15
-        
-        print("The temperature in Kelvin is " + str(kelvin) + '.')
+        kelvin = celsius + 273.15
+        kelvin = floatEval(kelvin)
+
+        print("The temperature in Kelvin is " + str(kelvin) + " Kelvin.")
 
         number = float(raw_input("What is the number you wish to have the absolute value of?\n> "))
-        decimals = number - int(number)
+        number = floatEval(number)
         
-        if decimals > 0:
-            number = int(number)
-    
         if number < 0:
             number = -number
 
@@ -64,6 +70,8 @@ gestureTuples = {
     "Spock": {"scissors": "smashes", "rock": "vaporizes"}
 }
 
+running = True
+
 while running == True and skip != 'y':
     playerChoice = raw_input("Rock, paper, scissors, lizard, or Spock?\n> ")
     playerChoice = re.sub("[^a-zA-Z]", "", str.lower(playerChoice))
@@ -83,13 +91,13 @@ while running == True and skip != 'y':
 
         if CPUChoice in gestureTuples[playerChoice]:
             print "%s %s %s. You win!" % (str.title(playerChoice), gestureTuples[playerChoice][CPUChoice], CPUChoice)
-            runChoice("Play again?")
+            running = runChoice("Play again?")
         elif playerChoice in gestureTuples[CPUChoice]:
             print "%s %s %s. You lose!" % (str.title(CPUChoice), gestureTuples[CPUChoice][playerChoice], playerChoice)
-            runChoice("Play again?")
+            running = runChoice("Play again?")
         else:
             print "%s and %s don't interact. It's a draw." % (str.title(playerChoice), CPUChoice)
-            runChoice("Play again?")
+            running = runChoice("Play again?")
     else:
-        runChoice("\"%s\" is not a valid choice." % playerChoice)
+        running = runChoice("\"%s\" is not a valid choice." % playerChoice)
     
