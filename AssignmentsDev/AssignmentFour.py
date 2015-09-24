@@ -42,7 +42,7 @@ while running == True and skip != 'y':
         kelvin = celsius + 273.15
         kelvin = floatEval(kelvin)
 
-        print("The temperature in Kelvin is " + str(kelvin) + " Kelvin.")
+        print("The temperature in Kelvin is " + str(kelvin) + " degrees.")
 
         number = float(raw_input("What is the number you wish to have the absolute value of?\n> "))
         number = floatEval(number)
@@ -50,7 +50,7 @@ while running == True and skip != 'y':
         if number < 0:
             number = -number
 
-        print("The absolute value of your number is " + str(number) + '.')
+        print("The absolute value of your number is " + str(number) + " degrees.")
         
         running = False
 
