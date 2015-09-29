@@ -1,5 +1,5 @@
 ﻿import re
-import random
+# import random
 import sys
 import math
 
@@ -73,31 +73,47 @@ gestureTuples = {
 running = True
 
 while running == True and skip != 'y':
-    playerChoice = raw_input("Rock, paper, scissors, lizard, or Spock?\n> ")
-    playerChoice = re.sub("[^a-zA-Z]", "", str.lower(playerChoice))
+    playerOneChoice = raw_input("Rock, paper, scissors, lizard, or Spock?\n> ")
+    playerOneChoice = re.sub("[^a-zA-Z]", "", str.lower(playerOneChoice))
     
-    if playerChoice == "spock":
-        playerChoice = "Spock"
+    if playerOneChoice == "spock":
+        playerOneChoice = "Spock"
 
     gestureOk = False
 
     for gesture in gestureTuples:
-        if playerChoice == gesture:
+        if playerOneChoice == gesture:
             gestureOk = True
             break
     
     if gestureOk:
-        CPUChoice = gestures[random.randint(1, 5) - 1]
+        #CPUChoice = gestures[random.randint(1, 5) - 1]
 
-        if CPUChoice in gestureTuples[playerChoice]:
-            print "%s %s %s. You win!" % (str.title(playerChoice), gestureTuples[playerChoice][CPUChoice], CPUChoice)
-            running = runChoice("Play again?")
-        elif playerChoice in gestureTuples[CPUChoice]:
-            print "%s %s %s. You lose!" % (str.title(CPUChoice), gestureTuples[CPUChoice][playerChoice], playerChoice)
-            running = runChoice("Play again?")
+        playerTwoChoice = raw_input("Rock, paper, scissors, lizard, or Spock?\n> ")
+        playerTwoChoice = re.sub("[^a-zA-Z]", "", str.lower(playerTwoChoice))
+        
+        if playerTwoChoice == "spock":
+            playerTwoChoice = "Spock"
+
+        gestureOk = False
+
+        for gesture in gestureTuples:
+            if playerTwoChoice == gesture:
+                gestureOk = True
+                break
+
+        if gestureOk:
+            if playerTwoChoice in gestureTuples[playerOneChoice]:
+                print "%s %s %s. You win!" % (str.title(playerOneChoice), gestureTuples[playerOneChoice][playerTwoChoice], playerTwoChoice)
+                running = runChoice("Play again?")
+            elif playerOneChoice in gestureTuples[playerTwoChoice]:
+                print "%s %s %s. You lose!" % (str.title(playerTwoChoice), gestureTuples[playerTwoChoice][playerOneChoice], playerOneChoice)
+                running = runChoice("Play again?")
+            else:
+                print "%s and %s don't interact. It's a draw." % (str.title(playerOneChoice), playerTwoChoice)
+                running = runChoice("Play again?")
         else:
-            print "%s and %s don't interact. It's a draw." % (str.title(playerChoice), CPUChoice)
-            running = runChoice("Play again?")
+            running = runChoice("\"%s\" is not a valid choice." % playerTwoChoice)
     else:
-        running = runChoice("\"%s\" is not a valid choice." % playerChoice)
+        running = runChoice("\"%s\" is not a valid choice." % playerOneChoice)
     
