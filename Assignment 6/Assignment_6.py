@@ -17,7 +17,7 @@ for row in range(0, dim):
         shape = shape + '*'
     shape = shape + '\n'
 
-print(shape)
+#print(shape)
 
 
 # Hollow square
@@ -35,7 +35,7 @@ for row in range(0, dim):
             shape = shape + ' '
     shape = shape + '\n'
 
-print(shape)
+#print(shape)
 
 # Full rectangle triangle
 
@@ -47,12 +47,14 @@ for row in range(0, dim):
         shape = shape + '*'
     shape = shape + '\n'
 
-print(shape)
+#print(shape)
 
 # Full isolesces triangle
+
 try:
-    length = int(raw_input("What length do you want your triangle to be?\n> "))
-    width = int(raw_input("What width do you want your triangle to be?\n> "))
+    #length = int(raw_input("What length do you want your triangle to be?\n> "))
+    #width = int(raw_input("What width do you want your triangle to be?\n> "))
+    length = width = dim
 except ValueError:
     print("You need to put in an integer.")
     sys.exit("Error occured, program aborted.")
@@ -78,5 +80,25 @@ for row in range(0, length):
         column += 1
     shape = shape + '\n'
     row += 1
+
+#print(shape)
+
+
+# Circle
+
+shape = ""
+row = column = 0
+
+radius = float(dim-1)/2 # is also x and y coordinate of middle
+
+for row in range(0, dim):
+    for column in range(0, dim):
+        hypothenuse = math.sqrt((math.fabs(radius - float(row))) ** 2 + (math.fabs(radius - float(column))) ** 2)
+        
+        if math.fabs(radius - hypothenuse) < 0.45:
+            shape = shape + '*'
+        else:
+            shape = shape + ' '
+    shape = shape + '\n'
 
 print(shape)
