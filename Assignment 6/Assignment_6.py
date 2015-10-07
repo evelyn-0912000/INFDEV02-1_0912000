@@ -1,6 +1,10 @@
 ﻿import sys
 import math
 
+#def dimensions(shapeName, dim):
+#    try:
+#        length
+
 try:
     dim = int(raw_input("What is the length you wish the squares and the full rectangular triangle to have?\n> "))
 except ValueError:
@@ -17,7 +21,7 @@ for row in range(0, dim):
         shape = shape + '*'
     shape = shape + '\n'
 
-#print(shape)
+print(shape)
 
 
 # Hollow square
@@ -35,7 +39,7 @@ for row in range(0, dim):
             shape = shape + ' '
     shape = shape + '\n'
 
-#print(shape)
+print(shape)
 
 # Full rectangle triangle
 
@@ -47,14 +51,14 @@ for row in range(0, dim):
         shape = shape + '*'
     shape = shape + '\n'
 
-#print(shape)
+print(shape)
 
 # Full isolesces triangle
 
 try:
-    #length = int(raw_input("What length do you want your triangle to be?\n> "))
-    #width = int(raw_input("What width do you want your triangle to be?\n> "))
-    length = width = dim
+    length = int(raw_input("What length do you want your triangle to be?\n> "))
+    width = int(raw_input("What width do you want your triangle to be?\n> "))
+    #length = width = dim
 except ValueError:
     print("You need to put in an integer.")
     sys.exit("Error occured, program aborted.")
@@ -62,17 +66,17 @@ except ValueError:
 shape = ""
 row = column = 0.0
 
-halfWidth = math.floor(float(width) / 2)
+halfWidth = (float(width) / 2) -.5
 
 for row in range(0, length):
     for column in range(0, width):
-        if column == halfWidth and not (row == 0 and length % 2 == 1):
+        if length % 2 == 1 and column == halfWidth:
             shape = shape + '*'
-        #elif (column == halfWidth or column == halfWidth+1) and length % 2 == 0:
-        #    shape = shape + '*'
-        elif 1 - (float(column) / halfWidth) < (float((row)) / length) and not (column > halfWidth):
+        elif length % 2 == 0 and (column == math.floor(halfWidth) or column == math.ceil(halfWidth)):
             shape = shape + '*'
-        elif (float(column) - halfWidth) / halfWidth < (float((row)) / length) and not column < halfWidth:
+        elif column < halfWidth and 1 - (float(row) / length) < (float(column) / halfWidth + 1/halfWidth):
+            shape = shape + '*'
+        elif column > halfWidth and (float(row) / length ) > (float(column - halfWidth) / halfWidth - 1/halfWidth):
             shape = shape + '*'
         else:
             shape = shape + ' '
@@ -81,7 +85,7 @@ for row in range(0, length):
     shape = shape + '\n'
     row += 1
 
-#print(shape)
+print(shape)
 
 
 # Circle
@@ -97,8 +101,28 @@ for row in range(0, dim):
         
         if math.fabs(radius - hypothenuse) < 0.45:
             shape = shape + '*'
+        elif math.fabs(-(row-radius*1.6) - (math.floor((column - radius))**2 * .2)) < .8: # y = x^2 * .2
+        # -(row-radius*1.6) == (column - radius)**2 * .2...
+            if (column > dim * .3 and column < dim * .7) and (row > radius * 1.2 and row < radius * 2):
+            # ...within domain <dim * .3, dim * .7> and reach <radius*1.2, radius*2:
+                shape = shape + '*'
+            else:
+                shape = shape + ' '
         else:
             shape = shape + ' '
     shape = shape + '\n'
 
 print(shape)
+
+
+# ☺
+
+shape = ""
+row = column = 0
+
+radius = float(dim-1)/2 # is also x and y coordinate of middle
+
+smile = {
+    'x': radius,
+    'y': radius + dim * .3
+}
