@@ -104,10 +104,12 @@ for row in range(0, dim):
         elif math.fabs(-(row-radius*1.6) - (math.floor((column - radius))**2 * .2)) < .8: # y = x^2 * .2
         # -(row-radius*1.6) == (column - radius)**2 * .2...
             if (column > dim * .3 and column < dim * .7) and (row > radius * 1.2 and row < radius * 2):
-            # ...within domain <dim * .3, dim * .7> and reach <radius*1.2, radius*2:
+            # ...within domain <dim * .3, dim * .7> and reach <radius*1.2, radius*2>:
                 shape = shape + '*'
             else:
                 shape = shape + ' '
+        elif math.fabs(radius*.7 - hypothenuse) < 0.45 and math.fabs(math.degrees(math.atan(hypothenuse)) - 70) < 5:
+            shape = shape + '*'
         else:
             shape = shape + ' '
     shape = shape + '\n'
